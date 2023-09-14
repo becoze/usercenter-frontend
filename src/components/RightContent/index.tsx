@@ -1,11 +1,12 @@
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { Space } from 'antd';
 import React from 'react';
+// @ts-ignore
 import { useModel } from 'umi';
 import HeaderSearch from '../HeaderSearch';
 import Avatar from './AvatarDropdown';
 import styles from './index.less';
-import { CSDN_LINK } from '@/constants';
+import { LINKEDIN_PROFILE } from '@/constants';
 
 export type SiderTheme = 'light' | 'dark';
 const GlobalHeaderRight: React.FC = () => {
@@ -22,20 +23,20 @@ const GlobalHeaderRight: React.FC = () => {
     <Space className={className}>
       <HeaderSearch
         className={`${styles.action} ${styles.search}`}
-        placeholder="搜索"
-        defaultValue="CSDN"
+        placeholder="Search"
+        defaultValue="--click--"
         options={[
           {
-            label: <a href="https://github.com/kongshier">github</a>,
+            label: <a href="https://github.com/becoze">github</a>,
             value: 'github',
           },
           {
-            label: <a href="https://blog.csdn.net/qq_56098191">CSDN</a>,
-            value: 'CSDN',
+            label: <a href="https://becoze.github.io/">My Blog</a>,
+            value: 'My Blog (click me!!!)',
           },
           {
-            label: <a href="https://juejin.cn/user/3320978695270526">掘金</a>,
-            value: '掘金',
+            label: <a href="https://www.linkedin.com/in/liyuan-liang/">LinkedIn</a>,
+            value: 'LinkedIn',
           },
         ]}
         // onSearch={value => {
@@ -45,7 +46,7 @@ const GlobalHeaderRight: React.FC = () => {
       <span
         className={styles.action}
         onClick={() => {
-          window.open(CSDN_LINK);
+          window.open(LINKEDIN_PROFILE);
         }}
       >
         <QuestionCircleOutlined />

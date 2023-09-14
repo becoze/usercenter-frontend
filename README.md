@@ -1,40 +1,90 @@
-# 用户中心系统
-用户管理，管理员可对用户进行增删改查操作，用户可以修改直接的信息
-## by十二
-[欢迎加入知识星球](yupi.icu)
+# User Management system
 
-### 登录界面
-![login](./public/remadeShow/login.png)
+Back-end repositories: https://github.com/becoze/usercenter-backend
 
-### 注册界面
-![register](./public/remadeShow/register.png)
+Front-end repositories: https://github.com/becoze/usercenter-frontend
 
-### 首页
-![index](./public/remadeShow/img.png)
+# Tech Stack
 
-### 用户管理界面
-![UserManage](./public/remadeShow/img2.png)
+Backend:
 
-### 用户信息界面
-![UserInfo](./public/remadeShow/img4.png)
+- Java
 
-### 用户新增界面
-![UserAdd](./public/remadeShow/img3.png)
+- Spring (IoC and DI)
 
-### 用户修改自己信息
-![UserUpdateInfo](./public/remadeShow/img5.png)
+- SpringMVC (web framework)
 
-### 用户修改密码
-![UserUpdatePassword](./public/remadeShow/img6.png)
+- Spring Boot (easier set up and deploy)
 
-### 管理员修改用户信息
-![AdminUpdateUser](./public/remadeShow/img7.png)
+- Mybatis & Mybatis-plus (ORM: map OOP models to relational database models)
 
-### 管理员查询用户
-![AdminSearchUser](./public/remadeShow/img8.png)
+- log4j (log)
+- MySQL (database)
 
-### 管理员删除用户
-![AdminDeleteUser](./public/remadeShow/img9.png)
+Frontend:
 
-### 后端接口访问
-![BackApi](./public/remadeShow/backApi.png)
+- React
+
+- HTML + CSS + JS
+
+- Umi (React enhancement)
+
+- Ant Design Pro (elements and components)
+
+Development Tools:
+
+- IntelliJ IDEA & WebStrom (IDE)
+- Maven (dependency management tool )
+- Mysql
+- jdk1.8
+- Typora (development log writing)
+
+# System Design & Structure
+
+![Structure ](https://raw.githubusercontent.com/becoze/becozePictureHosting/main/usercenter/readmeImage/stracture.png)
+
+# Function Modules
+
+## User Registration
+
+![register](https://raw.githubusercontent.com/becoze/becozePictureHosting/main/usercenter/readmeImage/register.png)
+
+## Login
+
+![login](https://raw.githubusercontent.com/becoze/becozePictureHosting/main/usercenter/readmeImage/login.png)
+
+## Home Page
+
+![welcome](https://raw.githubusercontent.com/becoze/becozePictureHosting/main/usercenter/readmeImage/welcome.png)
+
+## User Profile
+
+![profile](https://raw.githubusercontent.com/becoze/becozePictureHosting/main/usercenter/readmeImage/user_profile.png)
+
+## User modifies their own information
+
+![userModify](https://raw.githubusercontent.com/becoze/becozePictureHosting/main/usercenter/readmeImage/user_profile_modifly.png)
+
+## User changes their password
+
+![userChange](https://raw.githubusercontent.com/becoze/becozePictureHosting/main/usercenter/readmeImage/user_profile_password.png)
+
+## Administrator User Management
+
+![admin](https://raw.githubusercontent.com/becoze/becozePictureHosting/main/usercenter/readmeImage/user_management.png)
+
+## Administrator modifies other user's information
+
+user_management_modify
+
+![adminModifly](https://raw.githubusercontent.com/becoze/becozePictureHosting/main/usercenter/readmeImage/user_management_modifly.png)
+
+## Administrator delete user
+
+![adminDelete](https://raw.githubusercontent.com/becoze/becozePictureHosting/main/usercenter/readmeImage/user_management_delete.png)
+
+## Administrator add new user
+
+![add1](https://raw.githubusercontent.com/becoze/becozePictureHosting/main/usercenter/readmeImage/add_user_1.png)
+
+![add2](https://raw.githubusercontent.com/becoze/becozePictureHosting/main/usercenter/readmeImage/add_user_2.png)

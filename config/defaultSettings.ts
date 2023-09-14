@@ -12,9 +12,9 @@ const Settings: LayoutSettings & {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: '十二用户中心',
+  title: 'becoze UserCenter',
   pwa: false,
-  logo: 'http://picgo.kongshier.top/2767/usercenter.png',
+  logo: 'https://raw.githubusercontent.com/becoze/becozePictureHosting/main/usercenter/profile_img.jpg',
   iconfontUrl: '',
 };
 

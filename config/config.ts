@@ -17,6 +17,11 @@ export default defineConfig({
     siderWidth: 208,
     ...defaultSettings,
   },
+  locale: {
+    default: 'en-US',
+    antd: true,
+    baseNavigator: true,
+  },
   // https://umijs.org/zh-CN/plugins/plugin-locale
   dynamicImport: {
     loading: '@ant-design/pro-layout/es/PageLoading',

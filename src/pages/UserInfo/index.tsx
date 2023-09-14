@@ -4,7 +4,7 @@ import { ModalForm, ProForm, ProFormText } from '@ant-design/pro-components';
 import { Image, Button, message } from 'antd';
 import { request } from 'umi';
 import { modifyPassword, userModify } from '@/services/ant-design-pro/api';
-import { DEFAULT_AVATAR_URL, selectAvatarUrl } from '@/constants';
+import { DEFAULT_AVATAR_URL, selectAvatarUrl, selectGender } from '@/constants';
 import type { API } from '@/services/ant-design-pro/typings';
 import { ProFormSelect } from '@ant-design/pro-form';
 
@@ -22,7 +22,7 @@ const UserInfo: React.FC = () => {
     username: '',
     userAccount: '',
     avatarUrl: '',
-    gender: '男',
+    gender: 'Male',
     phone: '',
     email: '',
     userStatus: 0,
@@ -42,7 +42,7 @@ const UserInfo: React.FC = () => {
   console.log('currentUser:', myUser);
   return (
     <>
-      <Divider>用户头像</Divider>
+      <Divider>Avatar</Divider>
       <Descriptions style={{ margin: '20px', marginLeft: '700px' }}>
         <Descriptions.Item>
           <Image
@@ -52,42 +52,42 @@ const UserInfo: React.FC = () => {
           />
         </Descriptions.Item>
       </Descriptions>
-      <Divider>用户信息</Divider>
+      <Divider>Profile</Divider>
       <Descriptions bordered column={4}>
-        <Descriptions.Item label="用户名" span={1.5}>
+        <Descriptions.Item label="Username" span={1.5}>
           {myUser.username}
         </Descriptions.Item>
-        <Descriptions.Item label="用户账户" span={1.5}>
+        <Descriptions.Item label="User Account" span={1.5}>
           {myUser.userAccount}
         </Descriptions.Item>
-        <Descriptions.Item label="用户角色" span={1.5}>
-          {myUser.userRole === 'user' ? '普通用户' : '管理员'}
+        <Descriptions.Item label="User Role" span={1.5}>
+          {myUser.userRole}
         </Descriptions.Item>
-        <Descriptions.Item label="用户性别" span={1.5}>
-          {myUser.gender !== null ? (myUser.gender === '男' ? '男' : '女') : '未填写'}
+        <Descriptions.Item label="Gender" span={1.5}>
+          {myUser.gender}
         </Descriptions.Item>
-        <Descriptions.Item label="用户编号" span={1.5}>
+        <Descriptions.Item label="User Code" span={1.5}>
           {myUser.userCode}
         </Descriptions.Item>
-        <Descriptions.Item label="创建时间" span={1.5}>
+        <Descriptions.Item label="Create Time" span={1.5}>
           {myUser.createTime}
         </Descriptions.Item>
-        <Descriptions.Item label="用户状态" span={1.5}>
-          {myUser.userStatus === 0 ? '正常' : '异常'}
+        <Descriptions.Item label="User Status" span={1.5}>
+          {myUser.userStatus === 0 ? 'Normal' : 'Banned'}
         </Descriptions.Item>
-        <Descriptions.Item label="用户电话" span={1.5}>
+        <Descriptions.Item label="Phone" span={1.5}>
           {myUser.phone}
         </Descriptions.Item>
-        <Descriptions.Item label="用户邮箱" span={3}>
+        <Descriptions.Item label="Email" span={3}>
           {myUser.email}
         </Descriptions.Item>
       </Descriptions>
 
       <ModalForm<API.CurrentUser>
-        title="修改本用户信息"
+        title="Modifly Information (Current user)"
         trigger={
           <Button type="primary" shape="round" style={{ marginTop: '100px', marginLeft: '700px' }}>
-            修改信息
+            Modifly Information
           </Button>
         }
         autoFocusFirstInput
@@ -102,7 +102,7 @@ const UserInfo: React.FC = () => {
           values.id = myUser.id;
           const isModify = await userModify(values);
           if (isModify) {
-            message.success('修改成功');
+            message.success('Modified successfully');
             // 刷新用户信息表单
             location.reload();
             return true;
@@ -114,36 +114,44 @@ const UserInfo: React.FC = () => {
           <ProFormText
             width="md"
             name="username"
-            label="用户名"
-            placeholder="请输入用户名"
+            label="Username"
+            placeholder="New username"
             initialValue={myUser.username}
           />
           <ProFormText
             width="md"
             name="userCode"
-            label="用户编号"
-            placeholder="请输入用户编号"
+            label="User Code"
+            placeholder="New user code"
             initialValue={myUser.userCode}
           />
           <ProFormText
             width="md"
-            name="gender"
-            label="性别"
-            placeholder="请输入性别"
-            initialValue={myUser.gender}
-          />
-          <ProFormText
-            width="md"
             name="phone"
-            label="手机号"
-            placeholder="请输入手机号"
+            label="Phone number"
+            placeholder="New phone number"
             initialValue={myUser.phone}
+          />
+          <ProFormSelect
+            name="gender"
+            fieldProps={{
+              size: 'large',
+            }}
+            label="Gender"
+            options={selectGender}
+            placeholder="Gender"
+            initialValue={myUser.gender}
+            rules={[
+              {
+                message: 'Please choose gender',
+              },
+            ]}
           />
           <ProFormText
             width="md"
             name="email"
-            label="邮箱"
-            placeholder="请输入邮箱"
+            label="Email address"
+            placeholder="New Email address"
             initialValue={myUser.email}
           />
           <ProFormSelect
@@ -151,14 +159,13 @@ const UserInfo: React.FC = () => {
             fieldProps={{
               size: 'large',
             }}
-            label="用户头像"
+            label="User Avatar"
             options={selectAvatarUrl}
-            placeholder={'请选择用户头像 '}
+            placeholder={'Please select a user avatar'}
             initialValue={myUser.avatarUrl}
             rules={[
               {
-                required: true,
-                message: '请输入选择用户头像!',
+                message: 'Please select a user avatar from the list',
               },
             ]}
           />
@@ -166,10 +173,10 @@ const UserInfo: React.FC = () => {
       </ModalForm>
 
       <ModalForm<API.ModifyPasswordParam>
-        title="修改密码"
+        title="Change Password"
         trigger={
           <Button danger shape="round" style={{ margin: '50px' }}>
-            修改密码
+            Change Password
           </Button>
         }
         autoFocusFirstInput
@@ -182,13 +189,13 @@ const UserInfo: React.FC = () => {
           await waitTime(1000);
           const { userPassword, newPassword } = values;
           if (userPassword === newPassword) {
-            message.error('新密码不能与旧密码相同');
+            message.error('The new password cannot be the same as the old password');
             return false;
           }
           //点击了提交
           const isModify = await modifyPassword(values);
           if (isModify) {
-            message.success('修改成功');
+            message.success('Password changed successfully');
             // 刷新用户信息表单
             location.reload();
             return true;
@@ -200,18 +207,24 @@ const UserInfo: React.FC = () => {
           <ProFormText.Password
             width="md"
             name="userPassword"
-            label="原密码"
-            tooltip={'请输入本用户原密码'}
-            rules={[{ required: true }, { min: 8, message: '密码不会小于8位' }]}
-            placeholder="请输入原密码"
+            label="Current Password"
+            tooltip={'Current Password is required!'}
+            rules={[
+              { required: true },
+              { min: 8, message: 'Password cannot be less than 8 characters!' },
+            ]}
+            placeholder="Old Password is required!"
           />
           <ProFormText.Password
             width="md"
             name="newPassword"
-            label="新密码"
-            tooltip={'请输入新密码，密码不得小于8位'}
-            rules={[{ required: true }, { min: 8, message: '新密码小于8位' }]}
-            placeholder="请输入新密码"
+            label="New Passwords"
+            tooltip={'New Password is required, the Password cannot be less than 8 characters!'}
+            rules={[
+              { required: true },
+              { min: 8, message: 'Password cannot be less than 8 characters!' },
+            ]}
+            placeholder="New Password is required!"
           />
         </ProForm.Group>
       </ModalForm>

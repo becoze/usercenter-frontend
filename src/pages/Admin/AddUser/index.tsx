@@ -12,13 +12,13 @@ export default () => {
       // 创建用户
       const suc = await create(values);
       if (suc) {
-        const defaultLoginSuccessMessage = '创建成功！';
+        const defaultLoginSuccessMessage = 'Created successfully!';
         message.success(defaultLoginSuccessMessage);
         location.reload();
         return;
       }
     } catch (error: any) {
-      const defaultLoginFailureMessage = '注册失败，请重试！';
+      const defaultLoginFailureMessage = 'Registration failed, please try again!';
       message.error(defaultLoginFailureMessage);
     }
   };
@@ -27,130 +27,117 @@ export default () => {
       <LoginForm
         submitter={{
           searchConfig: {
-            submitText: '新增用户',
+            submitText: 'Add new user',
           },
         }}
         logo={SYSTEM_LOGO}
-        title="用户中心"
-        subTitle="十二学习圈用户管理平台"
+        title="becoze UserCenter"
+        subTitle="becoze User-Center management system by Liyuan Liang"
         onFinish={async (values) => {
           await handleCreate(values as API.CreateParams);
         }}
       >
         <Tabs centered activeKey={'account'}>
-          <Tabs.TabPane key={'account'} tab={'新增用户信息填写'} />
+          <Tabs.TabPane key={'account'} tab={'Create and insert a new account'} />
         </Tabs>
         {
           <>
             <ProFormText
               name="username"
+              label="New Username"
               fieldProps={{
                 size: 'large',
                 prefix: <UserOutlined className={'prefixIcon'} />,
               }}
-              placeholder="用户名"
+              placeholder="Username"
               rules={[
                 {
-                  required: true,
-                  message: '用户名不能为空!',
+                  message: 'Username is required!',
                 },
               ]}
             />
             <ProFormText
               name="userAccount"
+              label="User Account "
               fieldProps={{
                 size: 'large',
                 prefix: <UserOutlined className={'prefixIcon'} />,
               }}
-              placeholder="用户账户 "
+              placeholder="User Account "
               rules={[
                 {
                   required: true,
-                  message: '用户账户不能为空!',
+                  message: 'User account is required',
                 },
                 {
                   min: 4,
-                  message: '用户账户长度不小于4位',
+                  message: 'User account length should be at least 4 characters',
                 },
               ]}
             />
             <ProFormText.Password
               name="userPassword"
+              label="User Password"
               fieldProps={{
                 size: 'large',
                 prefix: <LockOutlined className={'prefixIcon'} />,
               }}
-              placeholder={'密码'}
+              placeholder={'Password'}
               rules={[
                 {
                   required: true,
-                  message: '请输入密码！',
+                  message: 'Please enter the password!',
                 },
                 {
                   min: 8,
-                  message: '密码长度不得小于8',
+                  message: 'Password length must not be less than 8',
                 },
               ]}
             />
             <ProFormText
               name="userCode"
+              label="User Code"
               fieldProps={{
                 size: 'large',
                 prefix: <UserOutlined className={'prefixIcon'} />,
               }}
-              placeholder={'请输入你想要编号 '}
+              placeholder={'Any number you want'}
               rules={[
                 {
                   max: 15,
-                  message: '用户编号不得大于15位',
+                  message: 'User Code must not be greater than 15 characters',
                 },
                 {
-                  required: true,
-                  message: '用户编号必填',
+                  message: 'User Code is required',
                 },
               ]}
             />
 
             <ProFormText
               name="phone"
+              label="Phone number"
               fieldProps={{
                 size: 'large',
                 prefix: <PhoneOutlined className={'prefixIcon'} />,
               }}
-              placeholder={'用户手机号 '}
+              placeholder={'Phone number'}
               rules={[
                 {
-                  required: true,
-                  message: '手机号码不能为空!',
+                  message: 'Phone number is required',
                 },
               ]}
             />
             <ProFormText
               name="email"
+              label="Email"
               fieldProps={{
                 size: 'large',
                 prefix: <MailOutlined className={'prefixIcon'} />,
               }}
-              placeholder={'用户邮箱 '}
+              placeholder={'Email'}
               rules={[
                 {
-                  required: true,
-                  message: '邮箱不能为空!',
-                },
-              ]}
-            />
-            <ProFormSelect
-              name="userStatus"
-              fieldProps={{
-                size: 'large',
-              }}
-              label="用户状态"
-              options={selectUserStatus}
-              placeholder={'选择用户状态'}
-              rules={[
-                {
-                  required: true,
-                  message: '请选择用户状态',
+                  message: 'Email is required',
                 },
               ]}
             />
@@ -159,13 +146,12 @@ export default () => {
               fieldProps={{
                 size: 'large',
               }}
-              label="用户头像"
+              label="User Avatar"
               options={selectAvatarUrl}
-              placeholder={'请选择用户头像 '}
+              placeholder={'Please choose the user avatar'}
               rules={[
                 {
-                  required: true,
-                  message: '请输入选择用户头像!',
+                  message: 'Please choose the user avatar',
                 },
               ]}
             />
@@ -174,13 +160,28 @@ export default () => {
               fieldProps={{
                 size: 'large',
               }}
-              label="性别"
+              label="Gender"
               options={selectGender}
-              placeholder="请选择性别"
+              placeholder="Please choose the gender"
+              rules={[
+                {
+                  message: 'Please choose the user gender',
+                },
+              ]}
+            />
+            <ProFormSelect
+              name="userStatus"
+              fieldProps={{
+                size: 'large',
+              }}
+              label="User Status"
+              options={selectUserStatus}
+              placeholder={'Please choose the user status'}
+              initialValue={'Normal'}
               rules={[
                 {
                   required: true,
-                  message: '请选择性别',
+                  message: 'Please choose the user status',
                 },
               ]}
             />
@@ -189,13 +190,14 @@ export default () => {
               fieldProps={{
                 size: 'large',
               }}
-              label="用户角色"
+              label="User Role"
               options={selectUserRole}
-              placeholder={'选择用户角色'}
+              placeholder={'Please choose the user role'}
+              initialValue={'User'}
               rules={[
                 {
                   required: true,
-                  message: '请选择用户角色',
+                  message: 'Please choose the user role',
                 },
               ]}
             />

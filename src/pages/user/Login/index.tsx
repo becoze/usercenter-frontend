@@ -6,7 +6,7 @@ import { Alert, Divider, message, Space, Tabs } from 'antd';
 import React, { useState } from 'react';
 import { history, Link, useModel } from 'umi';
 import styles from './index.less';
-import { CSDN_LINK, PLANET_LINK, SYSTEM_LOGO } from '@/constants';
+import { GITHUB_PROJECT_LINK, LINKEDIN_CONTACT, SYSTEM_LOGO } from '@/constants';
 import type { API } from '@/services/ant-design-pro/typings';
 
 const LoginMessage: React.FC<{
@@ -44,7 +44,7 @@ const Login: React.FC = () => {
         type,
       });
       if (user) {
-        const defaultLoginSuccessMessage = '登录成功！';
+        const defaultLoginSuccessMessage = 'Login successful!';
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
         /** 此方法会跳转到 redirect 参数所在的位置 */
@@ -57,7 +57,7 @@ const Login: React.FC = () => {
         return;
       }
     } catch (error) {
-      const defaultLoginFailureMessage = '登录失败，请重试！';
+      const defaultLoginFailureMessage = 'Login failed, please try again!';
       message.error(defaultLoginFailureMessage);
     }
   };
@@ -68,25 +68,30 @@ const Login: React.FC = () => {
       <div className={styles.content}>
         <LoginForm
           logo={<img alt="logo" src={SYSTEM_LOGO} />}
-          title="十二学习圈"
+          title="becoze UserCenter"
           subTitle={
-            <a href={PLANET_LINK} target="_blank" rel="noreferrer">
-              欢迎加入学习圈
+            <a href={GITHUB_PROJECT_LINK} target="_blank" rel="noreferrer">
+              becoze User-Center management system by Liyuan Liang
             </a>
           }
           initialValues={{
             autoLogin: true,
+          }}
+          submitter={{
+            searchConfig: {
+              submitText: 'Login',
+            },
           }}
           onFinish={async (values) => {
             await handleSubmit(values as API.LoginParams);
           }}
         >
           <Tabs activeKey={type} onChange={setType}>
-            <Tabs.TabPane key="account" tab={'账号密码登录'} />
+            <Tabs.TabPane key="account" tab={'User Account Login'} />
           </Tabs>
 
           {status === 'error' && loginType === 'account' && (
-            <LoginMessage content={'错误的账号和密码'} />
+            <LoginMessage content={'Incorrect account or password'} />
           )}
           {type === 'account' && (
             <>
@@ -96,11 +101,12 @@ const Login: React.FC = () => {
                   size: 'large',
                   prefix: <UserOutlined className={styles.prefixIcon} />,
                 }}
-                placeholder="请输入账号"
+                placeholder="Account"
                 rules={[
                   {
                     required: true,
-                    message: '账号是必填项！',
+                    min: 4,
+                    message: 'User Account is required!',
                   },
                 ]}
               />
@@ -110,16 +116,16 @@ const Login: React.FC = () => {
                   size: 'large',
                   prefix: <LockOutlined className={styles.prefixIcon} />,
                 }}
-                placeholder="请输入密码"
+                placeholder="Password"
                 rules={[
                   {
                     required: true,
-                    message: '密码是必填项！',
+                    message: 'Password is required!',
                   },
                   {
                     min: 8,
                     type: 'string',
-                    message: '密码不能小于8位！',
+                    message: 'Password length must not be less than 8!',
                   },
                 ]}
               />
@@ -131,19 +137,28 @@ const Login: React.FC = () => {
               marginBottom: 24,
             }}
           >
-            <Space split={<Divider type="vertical" />} size="middle">
-              <ProFormCheckbox name="autoLogin">记住密码</ProFormCheckbox>
+            <Space size={[0, 0]} wrap split={<Divider type="vertical" />}>
+              <a
+                style={{
+                  float: 'left',
+                  marginBottom: '-21px',
+                }}
+              >
+                <ProFormCheckbox name="autoLogin">Remember me</ProFormCheckbox>
+              </a>
+
               <a
                 style={{
                   float: 'right',
                 }}
-                href={CSDN_LINK}
+                href={LINKEDIN_CONTACT}
                 target="_blank"
                 rel="noreferrer"
               >
-                忘记密码
+                Forgot Password
               </a>
-              <Link to="/user/register">新用户注册</Link>
+
+              <Link to="/user/register">Register</Link>
             </Space>
           </div>
         </LoginForm>

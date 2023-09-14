@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer';
 import RightContent from '@/components/RightContent';
-import { BankTwoTone } from '@ant-design/icons';
+import { RocketFilled } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { PageLoading, SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from 'umi';
@@ -91,8 +91,8 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     links: isDev
       ? [
           <Link to="/~docs" key="docs">
-            <BankTwoTone spin={true} />
-            <span>用户中心文档介绍</span>
+            <RocketFilled />
+            <span>README!!!</span>
           </Link>,
         ]
       : [],

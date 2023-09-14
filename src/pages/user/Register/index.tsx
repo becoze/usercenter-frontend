@@ -2,11 +2,11 @@ import Footer from '@/components/Footer';
 import { register } from '@/services/ant-design-pro/api';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { LoginForm, ProFormText } from '@ant-design/pro-components';
-import { message, Tabs } from 'antd';
+import { Divider, message, Space, Tabs } from 'antd';
 import React, { useState } from 'react';
-import { history } from 'umi';
+import { history, Link } from 'umi';
 import styles from './index.less';
-import { PLANET_LINK, SYSTEM_LOGO } from '@/constants';
+import { GITHUB_PROJECT_LINK, SYSTEM_LOGO } from '@/constants';
 import type { API } from '@/services/ant-design-pro/typings';
 
 const Register: React.FC = () => {
@@ -16,14 +16,14 @@ const Register: React.FC = () => {
   const handleSubmit = async (values: API.RegisterParams) => {
     const { userPassword, checkPassword } = values;
     if (userPassword !== checkPassword) {
-      message.error('两次输入的密码不一致');
+      message.error('Password and Confirm Password not match!');
       return;
     }
     try {
       // 注册
       const id = await register(values);
       if (id) {
-        const defaultLoginSuccessMessage = '注册成功！';
+        const defaultLoginSuccessMessage = 'Registration successful!';
         message.success(defaultLoginSuccessMessage);
         /** 此方法会跳转到 redirect 参数所在的位置 */
         if (!history) return;
@@ -35,7 +35,7 @@ const Register: React.FC = () => {
         return;
       }
     } catch (error: any) {
-      const defaultLoginFailureMessage = '注册失败，请重试！';
+      const defaultLoginFailureMessage = 'Registration failed, please try again!';
       message.error(defaultLoginFailureMessage);
     }
   };
@@ -44,15 +44,15 @@ const Register: React.FC = () => {
       <div className={styles.content}>
         <LoginForm
           logo={<img alt="logo" src={SYSTEM_LOGO} />}
-          title="用户注册"
+          title="becoze UserCenter"
           subTitle={
-            <a href={PLANET_LINK} target="_blank" rel="noreferrer">
-              欢迎加入学习圈
+            <a href={GITHUB_PROJECT_LINK} target="_blank" rel="noreferrer">
+              becoze User-Center management system by Liyuan Liang
             </a>
           }
           submitter={{
             searchConfig: {
-              submitText: '注册',
+              submitText: 'Register',
             },
           }}
           initialValues={{
@@ -63,7 +63,7 @@ const Register: React.FC = () => {
           }}
         >
           <Tabs activeKey={type} onChange={setType}>
-            <Tabs.TabPane key="account" tab={'账号密码登录'} />
+            <Tabs.TabPane key="account" tab={'Account Register'} />
           </Tabs>
           {type === 'account' && (
             <>
@@ -73,16 +73,16 @@ const Register: React.FC = () => {
                   size: 'large',
                   prefix: <UserOutlined className={styles.prefixIcon} />,
                 }}
-                placeholder="请输入账号"
+                placeholder="New User Account"
                 rules={[
                   {
                     required: true,
-                    message: '账号是必填项！',
+                    message: 'User Account is required!',
                   },
                   {
                     min: 4,
                     type: 'string',
-                    message: '账号不能小于4位！',
+                    message: 'User account length should be at least 4 characters!',
                   },
                 ]}
               />
@@ -92,16 +92,16 @@ const Register: React.FC = () => {
                   size: 'large',
                   prefix: <LockOutlined className={styles.prefixIcon} />,
                 }}
-                placeholder="请输入密码"
+                placeholder="Account Password"
                 rules={[
                   {
                     required: true,
-                    message: '密码是必填项！',
+                    message: 'Password is required!',
                   },
                   {
                     min: 8,
                     type: 'string',
-                    message: '密码不能小于8位！',
+                    message: 'Password length must not be less than 8!',
                   },
                 ]}
               />
@@ -111,16 +111,16 @@ const Register: React.FC = () => {
                   size: 'large',
                   prefix: <LockOutlined className={styles.prefixIcon} />,
                 }}
-                placeholder="请再次输入密码"
+                placeholder="Confirm Password"
                 rules={[
                   {
                     required: true,
-                    message: '确认密码是必填项！',
+                    message: 'Please confirm your password!',
                   },
                   {
                     min: 8,
                     type: 'string',
-                    message: '密码不能小于8位！',
+                    message: 'Password length must not be less than 8!',
                   },
                 ]}
               />
@@ -130,21 +130,30 @@ const Register: React.FC = () => {
                   size: 'large',
                   prefix: <LockOutlined className={styles.prefixIcon} />,
                 }}
-                placeholder="请输入属于你的编号"
+                placeholder="User Code (any number you like)"
                 rules={[
                   {
                     required: true,
-                    message: '编号必填!',
+                    message: 'User code is required!',
                   },
                   {
                     max: 15,
                     type: 'string',
-                    message: '编号不能大于15位',
+                    message: 'User code must not be greater than 15 characters!',
                   },
                 ]}
               />
             </>
           )}
+          <div
+            style={{
+              marginBottom: 24,
+            }}
+          >
+            <Space size={[1, 1]} wrap split={<Divider type="vertical" />}>
+              <Link to="/user/login">Go to Login</Link>
+            </Space>
+          </div>
         </LoginForm>
       </div>
       <Footer />

@@ -15,8 +15,8 @@ import { stringify } from 'querystring';
  */
 const request = extend({
   credentials: 'include', // 默认请求是否带上cookie
-  prefix:
-    process.env.NODE_ENV === 'production' ? 'http://user.kongshier.top' : 'http://localhost:8101',
+  prefix: process.env.NODE_ENV === 'production' ? 'http://user.kongshier.top' : undefined,
+  // process.env.NODE_ENV === 'production' ? 'http://user.kongshier.top' : 'http://localhost:8101',
   // requestType: 'form',
 });
 
@@ -43,7 +43,7 @@ request.interceptors.response.use(async (response, options): Promise<any> => {
     return res.data;
   }
   if (res.code === 40100) {
-    message.error('请先登录!');
+    message.error('Please Login');
     history.replace({
       pathname: '/user/login',
       search: stringify({

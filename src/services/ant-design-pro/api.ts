@@ -111,10 +111,10 @@ export async function modifyPassword(
 }
 
 /** 头像上传 POST /api/file/upload */
-export async function fileUpload(body: API.FileUpload, options?: { [key: string]: any }) {
-  return request<API.BaseResponse<boolean>>('/api/file/upload', {
-    method: 'POST',
-    data: body,
-    ...options,
-  });
-}
+// export async function fileUpload(body: API.FileUpload, options?: { [key: string]: any }) {
+//   return request<API.BaseResponse<boolean>>('/api/file/upload', {
+//     method: 'POST',
+//     data: body,
+//     ...options,
+//   });
+// }
